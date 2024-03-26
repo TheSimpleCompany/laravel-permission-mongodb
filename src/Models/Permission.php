@@ -86,7 +86,7 @@ class Permission extends Model implements PermissionInterface
         $guardName = $guardName ?? (new Guard())->getDefaultName(static::class);
 
         $permission = static::getPermissions()->filter(function ($permission) use ($name, $guardName) {
-            return $permission->name === $name; // && $permission->guard_name === $guardName;  //TODO: temporary fix for laravel 11
+            return $permission->name === $name && $permission->guard_name === $guardName;
         })->first();
 
         if (!$permission) {
@@ -148,7 +148,7 @@ class Permission extends Model implements PermissionInterface
         $guardName = $guardName ?? (new Guard())->getDefaultName(static::class);
 
         $permission = static::getPermissions()->filter(function ($permission) use ($name, $guardName) {
-            return $permission->name === $name && $permission->guard_name === $guardName;
+            return $permission->name === $name; // && $permission->guard_name === $guardName; //TODO: temporary fix for laravel 11
         })->first();
 
         if (!$permission) {
